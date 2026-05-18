@@ -1,0 +1,120 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smgp"
+version = "1.0.0"
+description = "Spectral Memory Graph Processor — persistent, hallucination-free AI reasoning"
+readme = "PACKAGE.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Rohan R"},
+]
+keywords = ["graph", "spectral", "memory", "knowledge-graph", "attention", "reasoning", "hyperdimensional", "fpga", "hardware-acceleration"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+
+dependencies = [
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "networkx>=3.0",
+    "click>=8.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+topology = ["gudhi>=3.8"]
+attention = []
+integration = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+    "httpx>=0.24.0",
+]
+auth = [
+    "python-jose[cryptography]>=3.3.0",
+]
+huggingface = [
+    "transformers>=4.30.0",
+    "torch>=2.0",
+]
+langchain = ["langchain>=0.1.0"]
+vectordb = [
+    "qdrant-client>=1.7.0",
+    "sqlalchemy>=2.0",
+]
+onnx = [
+    "onnx>=1.14.0",
+    "torch>=2.0",
+]
+# Hardware executor — install alongside the hardware/ directory on the host
+hw = []
+all = [
+    "smgp[topology]",
+    "smgp[integration]",
+    "smgp[auth]",
+    "smgp[huggingface]",
+    "smgp[langchain]",
+    "smgp[vectordb]",
+    "smgp[onnx]",
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "pytest-anyio>=0.0.0",
+    "anyio>=4.0.0",
+    "hypothesis>=6.0.0",
+    "ruff>=0.1.0",
+    "black>=23.0",
+    "mypy>=1.5.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/rotsl/smgp"
+Documentation = "https://github.com/rotsl/smgp#readme"
+Repository = "https://github.com/rotsl/smgp"
+"Bug Tracker" = "https://github.com/rotsl/smgp/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "tests_enhanced"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP"]
+ignore = ["E501", "N803", "N806"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[project.scripts]
+smgp = "smgp.cli:cli"

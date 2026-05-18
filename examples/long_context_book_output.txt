@@ -1,0 +1,11 @@
+Building context graph...
+Graph: 0 nodes, 0 edges
+Running spectral attention...
+Output shape: (256, 64)
+First-last token similarity after attention: 0.7051
+
+Hierarchical coarsening:
+  Level 0: 256 nodes
+  Level 1: 128 nodes
+  Level 2: 64 nodes
+  Level 3: 32 nodes

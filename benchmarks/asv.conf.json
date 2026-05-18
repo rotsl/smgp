@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "project": "smgp",
+    "project_url": "https://github.com/rotsl/smgp",
+    "repo": "..",
+    "branches": ["main"],
+    "environment_type": "virtualenv",
+    "install_command": ["pip install -e '.[dev]'"],
+    "test_command": ["pytest tests/ -q"],
+    "benchmark_dir": "benchmarks",
+    "env_dir": "env",
+    "results_dir": "results",
+    "html_dir": "html",
+    "matrix": {
+        "python": ["3.10", "3.11", "3.12"]
+    }
+}

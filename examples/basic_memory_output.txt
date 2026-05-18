@@ -1,0 +1,10 @@
+Graph: 4 nodes, 3 edges
+
+Similar nodes:
+  SMGP: 1.0000
+  persistent_memory: 0.0070
+  graph_theory: 0.0060
+
+Eigenvalues: [-1.40512602e-16  1.00000000e+00  1.00000000e+00]
+
+Bind/Unbind recovery: 1.000000 (should be 1.0)

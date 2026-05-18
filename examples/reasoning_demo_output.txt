@@ -1,0 +1,13 @@
+Knowledge Graph:
+  Nodes: 5
+  Edges: 5
+
+Claim Verification:
+  [VERIFIED] Socrates taught Plato (confidence=1.00)
+  [VERIFIED] Plato founded Academy (confidence=1.00)
+  [UNVERIFIED] Socrates founded Academy (confidence=0.00)
+
+Graph Rewriting (DPO):
+  Found 2 'taught' relations:
+    Socrates -> Plato
+    Plato -> Aristotle

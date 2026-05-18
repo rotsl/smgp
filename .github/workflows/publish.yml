@@ -1,0 +1,68 @@
+name: Publish to PyPI
+
+# Trigger on GitHub Release publish OR a version tag push.
+# PyPI Trusted Publishing (OIDC) requires no API key — configure a Trusted Publisher
+# in your PyPI project settings pointing to:
+#   owner: rotsl  repo: smgp  workflow: publish.yml  environment: pypi
+on:
+  release:
+    types: [published]
+  push:
+    tags:
+      - 'v*'
+
+# Minimal default permissions — publish job overrides with id-token: write
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install build tools
+        run: python -m pip install --upgrade pip build
+
+      - name: Build sdist and wheel
+        run: python -m build
+
+      - name: Upload distribution artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+
+  publish:
+    name: Publish to PyPI (OIDC)
+    needs: build
+    runs-on: ubuntu-latest
+    # Maps to the "pypi" environment configured in repo Settings → Environments.
+    # The PyPI Trusted Publisher must also name this environment.
+    environment:
+      name: pypi
+      url: https://pypi.org/project/smgp/
+    permissions:
+      # Required for OIDC token exchange with PyPI — no API key needed.
+      id-token: write
+      contents: read
+    steps:
+      - name: Download distribution artefacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish to PyPI via Trusted Publishing
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # No `password:` or `repository-url:` needed — OIDC handles auth.
+        # To test against TestPyPI first, uncomment:
+        # with:
+        #   repository-url: https://test.pypi.org/legacy/

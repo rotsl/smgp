@@ -1,0 +1,67 @@
+name: Hardware CI
+
+on:
+  push:
+    paths:
+      - 'hardware/**'
+  pull_request:
+    paths:
+      - 'hardware/**'
+  workflow_dispatch:
+
+jobs:
+  rtl-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Verilator
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y verilator
+
+      - name: Lint RTL
+        run: |
+          cd hardware
+          bash sim/scripts/run_verilator.sh lint
+
+  simulation:
+    runs-on: ubuntu-latest
+    needs: rtl-lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Verilator
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y verilator
+
+      - name: Install Python deps
+        run: pip install numpy scipy pytest
+
+      - name: Run golden model tests
+        run: |
+          python hardware/sim/models/gold_spectral_model.py
+          python hardware/sim/models/gold_hd_model.py
+
+      - name: Run hardware integration tests
+        run: |
+          pip install -e .
+          PYTHONPATH=src:hardware/sw python -m pytest hardware/tests/ -v --tb=short
+
+  fpga-synthesis-check:
+    runs-on: ubuntu-latest
+    needs: rtl-lint
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Vivado (check only)
+        run: |
+          if command -v vivado &> /dev/null; then
+            echo "Vivado found, running synthesis check"
+            cd hardware/fpga/build
+            make synth || true
+          else
+            echo "Vivado not installed, skipping FPGA synthesis check"
+          fi

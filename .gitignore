@@ -1,0 +1,116 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+.installed.cfg
+/lib/
+/lib64/
+MANIFEST
+.Python
+
+# Virtual environments
+.env
+.venv
+.venv*/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Distribution / packaging
+.eggs/
+*.egg-info/
+*.dist-info/
+
+# Testing
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Benchmarks
+benchmarks/env/
+benchmarks/results/
+benchmarks/html/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Cython build artifacts
+src/smgp/enhanced/speed/*.c
+src/smgp/enhanced/speed/*.html
+*.pyd
+
+# Logs & databases
+*.log
+*.sqlite
+*.db
+memory_event_log.jsonl
+src/smgp/memory/_default_event_log.jsonl
+
+# Secrets / environment
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Research / internal documents (not distributed)
+PAPER.md
+
+# Hardware simulation build outputs
+hardware/sim/models/*.so
+hardware/sim/models/*.a
+hardware/fpga/build/vivado/
+hardware/asic/openlane/runs/
+
+# FPGA / bitstream artefacts
+*.xclbin
+*.bit
+*.dcp
+*.jou
+*.str
+vivado*.log
+vivado*.jou
+vivado_*.backup.log
+.Xil/
+
+# ONNX / model exports
+*.onnx
+
+# Miscellaneous
+*.bak
+*.orig
+*.patch
+
+# Paper (local arXiv draft)
+paper/

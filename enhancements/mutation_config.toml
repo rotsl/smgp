@@ -1,0 +1,84 @@
+# SMGP Mutation Testing Configuration
+# Used by mutmut or cosmic-ray to evaluate test suite effectiveness.
+#
+# Mutation testing systematically introduces small code changes (mutations)
+# into the source code and verifies that the test suite detects them.
+# A high mutation score indicates a robust test suite.
+#
+# References:
+#   DeMillo, R.A., et al. (1978). "Hints on Test Data Selection."
+#       IEEE Computer, 11(4), 34-41.
+#   Jia, Y. & Harman, M. (2011). "An Analysis and Survey of the
+#       Development of Mutation Testing." IEEE TSE, 37(5), 649-678.
+
+[mutmut]
+# Paths to the source code that should be mutated.
+# Only the core package is targeted to keep mutation runtime manageable.
+paths_to_mutate = "src/smgp/core/"
+
+# Directory containing the test suite used to validate mutations.
+tests_dir = "tests/"
+
+# Create backup of original source files before mutating.
+backup = true
+
+# Number of parallel worker processes for mutation execution.
+# Increase for faster runs on multi-core machines.
+workers = 4
+
+# Random seed for reproducible mutation ordering.
+rng_seed = 42
+
+# Maximum number of mutations to run (0 = unlimited).
+# Set to a positive integer for quick smoke tests.
+max_mutations = 0
+
+# Output format: "text" for human-readable, "json" for CI integration.
+output_format = "text"
+
+# Files or directories to exclude from mutation.
+# The __init__.py files are excluded since mutations there rarely
+# provide meaningful test signal.
+exclude_files = [
+    "*/__init__.py",
+]
+
+# Mutation operators to apply.
+# These are the specific code transformations that mutmut will perform.
+# Each operator targets a different category of potential defects.
+#
+# arithmetic_operator:  Replace +, -, *, /, //, %, ** with alternatives
+# comparison_operator: Replace ==, !=, <, >, <=, >= with alternatives
+# logical_operator:    Replace "and", "or", "not" with alternatives
+# conditional:         Flip if/else branches, modify conditions
+# return_value:        Mutate return statements
+operators = [
+    "arithmetic_operator",
+    "comparison_operator",
+    "logical_operator",
+    "conditional",
+    "return_value",
+]
+
+# Minimum mutation score (percentage) required for CI to pass.
+# A score below this threshold indicates the test suite needs improvement.
+ci_threshold = 80.0
+
+[cosmic-ray]
+# Alternative mutation testing tool configuration (cosmic-ray).
+# Cosmic-ray uses a plugin architecture for mutation operators.
+
+# Module prefix to mutate.
+module_prefix = "smgp.core"
+
+# Test runner command (cosmic-ray executes this for each mutant).
+test-command = "pytest tests/ -x -q --tb=no"
+
+# Number of concurrent workers.
+baseline = 10
+
+# Execution timeout per mutant in seconds.
+timeout = 300
+
+# Output report format.
+report-format = "json"

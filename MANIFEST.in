@@ -1,0 +1,66 @@
+# MANIFEST.in — controls which files are included in the source distribution.
+# Note: RESEARCH.md and ROADMAP.md are intentionally excluded from sdist.
+
+include PACKAGE.md
+include LICENSE
+include CHANGELOG.md
+include CITATION.cff
+include CODE_OF_CONDUCT.md
+include MANIFEST.in
+include pyproject.toml
+include setup.cfg
+include pytest.ini
+
+# Source package
+graft src
+
+# Tests
+graft tests
+graft tests_enhanced
+
+# Hardware RTL, HAL, and docs (excluding large generated artefacts)
+graft hardware/rtl
+graft hardware/sw
+graft hardware/docs_hw
+graft hardware/sim/models
+graft hardware/sim/testbench
+graft hardware/sim/scripts
+graft hardware/fpga/build/scripts
+include hardware/fpga/build/Makefile
+include hardware/fpga/build/vivado_project.tcl
+include hardware/README_HW.md
+
+# Notebooks and examples
+graft notebooks
+graft examples
+
+# Docs
+graft docs
+
+# Enhancements source
+graft enhancements
+
+# Exclude generated / binary / secret artefacts everywhere
+global-exclude __pycache__
+global-exclude *.py[cod]
+global-exclude *.so
+global-exclude *.dylib
+global-exclude *.egg-info
+global-exclude *.egg
+global-exclude .DS_Store
+global-exclude *.log
+global-exclude *.sqlite
+global-exclude *.db
+global-exclude *.onnx
+global-exclude *.xclbin
+global-exclude *.bit
+global-exclude *.dcp
+global-exclude *.jou
+global-exclude *.str
+global-exclude coverage.xml
+global-exclude .coverage
+prune hardware/fpga/build/vivado
+prune hardware/asic/openlane/runs
+prune .venv
+prune .venv_torch
+prune .github

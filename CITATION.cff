@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use SMGP in your research, please cite it as follows."
+title: "Spectral Memory Graph Processor (SMGP)"
+version: "0.1.0"
+date-released: "2026-05-17"
+url: "https://github.com/rotsl/smgp"
+authors:
+  - family-names: "R"
+    given-names: "Rohan"
+    orcid: "https://orcid.org/0009-0005-9225-1775"
+license: Apache-2.0
+keywords:
+  - "graph neural networks"
+  - "spectral graph theory"
+  - "persistent memory"
+  - "hyperdimensional computing"
+  - "knowledge graphs"
+  - "topological data analysis"
