@@ -1,3 +1,5 @@
+<img src="docs/logo.jpg" alt="SMGP Logo" width="160" align="right" style="margin-left:20px;margin-bottom:10px;" />
+
 # SMGP — Spectral Memory Graph Processor
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
