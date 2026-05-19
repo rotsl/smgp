@@ -10,7 +10,7 @@
 [![RTL Sim](https://img.shields.io/badge/RTL_sim-6%2F6_pass-brightgreen.svg)](https://github.com/rotsl/smgp/tree/main/hardware)
 [![Verilator](https://img.shields.io/badge/Verilator-5.048-blue.svg)](https://www.veripool.org/verilator/)
 [![PyPI](https://img.shields.io/badge/PyPI-v1.0.0-blue)](https://pypi.org/project/smgp/)
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/smgp?style=flat-square&logo=appveyor&labelColor=black)](https://pypi.org/project/smgp/)
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/smgp?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=BLUE&left_text=downloads)](https://pepy.tech/projects/smgp)
 [![Code style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v1.json)](https://github.com/charliermarsh/ruff)
 
 **Persistent, hallucination-free AI reasoning through spectral graph theory, hyperdimensional computing, and dedicated hardware acceleration.**
